@@ -1,10 +1,19 @@
-import { env } from "../env/server.mjs"
-
-const graphQLAPI = env.NEXT_PUBLIC_GRAPHQL
+import { env } from "../env/client.mjs";
 
 
-const fetchData = async (query: string, variables?: object) => {
-    const headers = { 'Content-Type': 'application/json' }
+const graphQLAPI = env.NEXT_PUBLIC_GRAPHQL;
+
+
+
+
+const fetchData = async (query: string, { variables = {} }, token?: string) => {
+    const headers: { 'Content-Type': string, Authentication?: string } = {
+        'Content-Type': 'application/json',
+    }
+
+    if (token) {
+        headers.Authentication = `Bearer ${token}`
+    }
 
     const res = await fetch(graphQLAPI || '', {
         method: 'POST',

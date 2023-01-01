@@ -13,5 +13,8 @@ const config = {
     locales: ["en"],
     defaultLocale: "en",
   },
+  images:{
+    domains:['localhost','rb.gy']
+  }
 };
 export default config;
