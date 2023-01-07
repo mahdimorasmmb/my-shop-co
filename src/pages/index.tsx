@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { dehydrate, QueryClient, useQuery } from "@tanstack/react-query";
 import Head from "next/head";
 import Landing from "../components/Landing/Landing";
 import { getHomepageCategories, getHomepageProduct } from "../queries/queries";
@@ -72,5 +72,19 @@ const Home = () => {
     );
   }
 };
+
+export async function getStaticProps() {
+  const queryClient = new QueryClient()
+
+  await queryClient.prefetchQuery(['products'], getHomepageProduct)
+  await queryClient.prefetchQuery(['categories'], getHomepageCategories)
+
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+  }
+}
+
 
 export default Home;
