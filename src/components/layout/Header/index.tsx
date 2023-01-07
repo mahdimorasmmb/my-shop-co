@@ -7,7 +7,7 @@ import ShoppingBag from "./NabBar/ShoppingBag";
 import Profile from "./NabBar/Profile";
 import NavList from "./NabBar/NavList";
 import RightNav from "./NabBar/RightNav";
-import Basket from "../../../widget /Basket";
+import Basket from "../../../widgets/Basket";
 
 const navList = [
   { text: "ارتباظ با ما ", href: "" },

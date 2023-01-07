@@ -7,11 +7,14 @@ query HomepageProduct {
        product_name
        price
        product_image {
-        id
+        directus_files_id {
+            id
+        }
        } 
        product_categories {
-        categories_id {
+        Category_id {
             id
+            slug
             category_name
         }
        }

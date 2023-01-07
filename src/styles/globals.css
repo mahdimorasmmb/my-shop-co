@@ -9,3 +9,16 @@
     font-family: "IRANYekan", sans-serif;
   }
 }
+
+@layer components {
+  .heroLink {
+    @apply relative cursor-pointer text-lg font-medium before:absolute before:inset-x-0 before:-bottom-1 before:h-1 before:origin-left before:scale-x-0 before:transform before:rounded-bl before:bg-black before:transition-all before:duration-200 hover:before:scale-x-100;
+  }
+
+  .borderGradient {
+    background: linear-gradient(to right, #ec4899, #8b5cf6) left bottom
+      no-repeat;
+    background-size: 100% 2px;
+    padding-bottom: 5px;
+  }
+}
