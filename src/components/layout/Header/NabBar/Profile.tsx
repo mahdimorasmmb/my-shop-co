@@ -6,18 +6,18 @@ import { UserIcon } from "@heroicons/react/outline";
 const Profile = () => {
   const session = false;
 
-  if (session && session.user?.image) {
-    return (
-      <Image
-        src={session.user.image}
-        alt=""
-        className="cursor-pointer rounded-full"
-        width={34}
-        height={34}
-        //   onClick={()=>signOut}
-      />
-    );
-  }
+  // if (session && session.user?.image) {
+  //   return (
+  //     <Image
+  //       src={session.user.image}
+  //       alt=""
+  //       className="cursor-pointer rounded-full"
+  //       width={34}
+  //       height={34}
+  //       //   onClick={()=>signOut}
+  //     />
+  //   );
+  // }
   return (
     <UserIcon
       // onClick={() => signIn()}
