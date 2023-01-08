@@ -23,7 +23,7 @@ const Landing = () => {
         </div>
       </div>
 
-      <div>
+      <div className="md:hidden">
         <h1 className="  text-5xl font-semibold tracking-wide lg:text-6xl">
           <span className="block"> کاشان</span>
           <span className="block bg-gradient-to-r from-pink-500 to-violet-500 bg-clip-text text-transparent">
