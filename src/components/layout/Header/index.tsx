@@ -2,12 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-import { SearchIcon } from "@heroicons/react/outline";
 import ShoppingBag from "./NabBar/ShoppingBag";
 import Profile from "./NabBar/Profile";
 import NavList from "./NabBar/NavList";
 import RightNav from "./NabBar/RightNav";
 import Basket from "../../../widgets/Basket";
+import SearchNav from "../../../widgets/SearchNav";
 
 const navList = [
   { text: "ارتباظ با ما ", href: "" },
@@ -39,10 +39,8 @@ const Header = () => {
           />
         </Link>
       </div>
-
-      <SearchIcon className="h-5 w-5 cursor-pointer opacity-75 transition hover:opacity-100 " />
-      <input />
-
+      <p>فرش پدیده </p>
+      <SearchNav />
       <NavList list={navList} />
       <RightNav list={rightList} />
     </header>

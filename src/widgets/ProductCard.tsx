@@ -13,7 +13,7 @@ const ProductCard = ({ product }: Props) => {
   return (
     <div
       dir="rtl"
-      className="   min-h-[10rem] w-96  overflow-hidden rounded-md bg-white text-gray-700 shadow-lg"
+      className="   min-h-[10rem] max-w-sm  overflow-hidden rounded-md bg-white text-gray-700 shadow-lg"
     >
       <img
         className=" h-[525px] w-full object-cover"
