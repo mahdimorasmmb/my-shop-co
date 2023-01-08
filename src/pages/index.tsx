@@ -34,7 +34,7 @@ const Home = () => {
     const tabTitle = categories.map((cat) => {
       const tabProducts = products.filter((product) => {
         return product.product_categories.some(
-          (e) => e.Category_id.id === cat.id
+          (e) => e.categories_id.id === cat.id
         );
       });
       return {
@@ -76,12 +76,12 @@ const Home = () => {
 export async function getStaticProps() {
   const queryClient = new QueryClient()
 
-  await queryClient.prefetchQuery(['products'], getHomepageProduct)
-  await queryClient.prefetchQuery(['categories'], getHomepageCategories)
+  // await queryClient.prefetchQuery(['products'], getHomepageProduct)
+  // await queryClient.prefetchQuery(['categories'], getHomepageCategories)
 
   return {
     props: {
-      dehydratedState: dehydrate(queryClient),
+      // dehydratedState: dehydrate(queryClient),
     },
   }
 }

@@ -36,7 +36,7 @@ interface Product {
     price: number
     stock: number
     product_categories: [{
-        Category_id: {
+        categories_id: {
             id: string
         }
     }]

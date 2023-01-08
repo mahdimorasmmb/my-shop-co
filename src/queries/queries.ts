@@ -20,5 +20,5 @@ export const getHomepageCategories = async () => {
     )
    
 
-    return data.data.Category
+    return data.data.categories
 }

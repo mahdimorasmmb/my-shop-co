@@ -2,11 +2,10 @@
 
 export const HomepageCategoriesQuery = `#graphql
 query HomepageCategories {
-  Category {
+  categories {
    id
-   slug
    category_name
-   
+   slug
   }
 }
 `

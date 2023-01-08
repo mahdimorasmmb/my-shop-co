@@ -12,11 +12,11 @@ query HomepageProduct {
         }
        } 
        product_categories {
-        Category_id {
+        categories_id {
             id
             slug
             category_name
-        }
+        } 
        }
     }
 }
