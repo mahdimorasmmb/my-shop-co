@@ -16,7 +16,7 @@ const ProductCard = ({ product }: Props) => {
       className="   min-h-[10rem] w-96  overflow-hidden rounded-md bg-white text-gray-700 shadow-lg"
     >
       <img
-        className=" h-4/6 w-full object-cover"
+        className=" h-[525px] w-full object-cover"
         src={`${assetsUrl}/${product.product_image[0].directus_files_id.id}`}
         alt="image"
       />

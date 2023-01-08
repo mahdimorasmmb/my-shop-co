@@ -30,8 +30,8 @@ const Home = () => {
 
   // console.log(categories, "====================");
 
-  if (isSuccessProduct && isSuccessCategories) {
-    const tabTitle = categories.map((cat) => {
+ 
+    const tabTitle = (isSuccessCategories && isSuccessProduct) && categories.map((cat) => {
       const tabProducts = products.filter((product) => {
         return product.product_categories.some(
           (e) => e.categories_id.id === cat.id
@@ -48,6 +48,8 @@ const Home = () => {
         ),
       };
     });
+  
+    
     return (
       <>
         <Head>
@@ -64,24 +66,26 @@ const Home = () => {
               محصولات جدید
             </h1>
             <div className="   mx-auto flex max-w-fit justify-center pt-10 pb-24 sm:px-4  ">
-              <Tab tabs={tabTitle} />
+              {
+                tabTitle && <Tab tabs={tabTitle}  />
+              }
             </div>
           </div>
         </section>
       </>
     );
-  }
+
 };
 
 export async function getStaticProps() {
   const queryClient = new QueryClient()
 
-  // await queryClient.prefetchQuery(['products'], getHomepageProduct)
-  // await queryClient.prefetchQuery(['categories'], getHomepageCategories)
+  await queryClient.prefetchQuery(['products'], getHomepageProduct)
+  await queryClient.prefetchQuery(['categories'], getHomepageCategories)
 
   return {
     props: {
-      // dehydratedState: dehydrate(queryClient),
+      dehydratedState: dehydrate(queryClient),
     },
   }
 }
