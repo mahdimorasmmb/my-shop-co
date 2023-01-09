@@ -1,6 +1,8 @@
 import Image from "next/legacy/image";
 import React from "react";
 import { env } from "../env/client.mjs";
+import { useCheckoutStore } from "../store/index";
+
 import Button from "./Button";
 
 interface Props {
@@ -10,6 +12,9 @@ interface Props {
 const assetsUrl = env.NEXT_PUBLIC_ASSETS_URL;
 
 const ProductCard = ({ product }: Props) => {
+  const addItem = useCheckoutStore((state) => state.addItems);
+  
+
   return (
     <div
       dir="rtl"
@@ -24,14 +29,17 @@ const ProductCard = ({ product }: Props) => {
       <div className=" flex flex-col gap-3 p-5">
         <div className="flex items-center gap-2">
           <span className="rounded-full bg-gray-100 px-3 py-1 text-xs">
-            در انبار موجود است {" "}
+            در انبار موجود است{" "}
           </span>
           {/* <span className="rounded-full bg-gray-100 px-3 py-1 text-xs">
             official store
           </span> */}
         </div>
-        <h2 title={product.product_name} className=" overflow-hidden overflow-ellipsis whitespace-nowrap text-2xl font-semibold">
-        {product.product_name}
+        <h2
+          title={product.product_name}
+          className=" overflow-hidden overflow-ellipsis whitespace-nowrap text-2xl font-semibold"
+        >
+          {product.product_name}
         </h2>
         <div>
           <span className="text-xl font-bold">40000000</span>
@@ -43,7 +51,7 @@ const ProductCard = ({ product }: Props) => {
           </div>
         </div>
         <div className="mt-2">
-          <Button title="افزودن به سبد خرید" />
+          <Button title="افزودن به سبد خرید" onClick={()=> addItem(product)} />
         </div>
       </div>
     </div>

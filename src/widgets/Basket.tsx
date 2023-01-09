@@ -3,6 +3,10 @@ import React from "react";
 // import { selectBasketItems } from "../../redux/basketSlice";
 // import { useSelector } from "react-redux";
 import { ShoppingBagIcon } from "@heroicons/react/outline";
+import { useCheckoutStore } from "../store/index";
+
+
+
 
 interface Props {
   type?: "default" | "bottomPage";
@@ -10,6 +14,7 @@ interface Props {
 
 const Basket: React.FC<Props> = ({ type }) => {
   // const items = useSelector(selectBasketItems);
+  const items = useCheckoutStore((state)=>state.items)
 
   const ContentComponent = () => {
     return (
@@ -20,7 +25,7 @@ const Basket: React.FC<Props> = ({ type }) => {
             : "fixed bottom-10 right-10 z-50 flex h-16 w-16 cursor-pointer items-center justify-center rounded-full bg-gray-300"
         }`}
       >
-        {/* {items.length > 0 && (
+        {items.length > 0 && (
           <span
             className={` absolute z-50 flex items-center justify-center rounded-full bg-gradient-to-r from-pink-500 to-violet-500 text-[10px] text-white ${
               type === "default"
@@ -30,15 +35,15 @@ const Basket: React.FC<Props> = ({ type }) => {
           >
             {items.length}
           </span>
-        )} */}
+        )}
         <ShoppingBagIcon className="h-6 w-6  opacity-75 transition hover:opacity-100" />
       </div>
     );
   };
 
-  // if (items.length === 0 && type === "bottomPage") {
-  //   return null;
-  // }
+  if (items.length === 0 && type === "bottomPage") {
+    return null;
+  }
 
   if (type === "bottomPage") {
     return (

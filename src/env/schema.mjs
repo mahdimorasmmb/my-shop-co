@@ -8,7 +8,7 @@ import { z } from "zod";
 export const serverSchema = z.object({
   NODE_ENV: z.enum(["development", "test", "production"]),
   GRAPHQL:z.string(),
-  ASSETS_URL:z.string()
+  ASSETS_URL:z.string(),
 });
 
 /**
@@ -18,7 +18,12 @@ export const serverSchema = z.object({
  */
 export const clientSchema = z.object({
   NEXT_PUBLIC_GRAPHQL:z.string(),
-  NEXT_PUBLIC_ASSETS_URL:z.string()
+  NEXT_PUBLIC_ASSETS_URL:z.string(),
+  NEXT_PUBLIC_GOOGLE_CLIENT_ID:z.string(),
+  NEXT_PUBLIC_GOOGLE_CLIENT_SECRET:z.string(),
+  NEXT_PUBLIC_JWT_SECRET:z.string(),
+  NEXT_PUBLIC_GITHUB_ID:z.string(),
+  NEXT_PUBLIC_GITHUB_SECRET:z.string()
 });
 
 /**
@@ -29,5 +34,12 @@ export const clientSchema = z.object({
  */
 export const clientEnv = {
   NEXT_PUBLIC_GRAPHQL:process.env.NEXT_PUBLIC_GRAPHQL,
-  NEXT_PUBLIC_ASSETS_URL:process.env.NEXT_PUBLIC_ASSETS_URL
+  NEXT_PUBLIC_ASSETS_URL:process.env.NEXT_PUBLIC_ASSETS_URL,
+  NEXT_PUBLIC_GOOGLE_CLIENT_ID:process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
+  NEXT_PUBLIC_GOOGLE_CLIENT_SECRET:process.env.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET,
+  NEXT_PUBLIC_JWT_SECRET:process.env.NEXT_PUBLIC_JWT_SECRET,
+  NEXT_PUBLIC_GITHUB_ID:process.env.NEXT_PUBLIC_GITHUB_ID,
+  NEXT_PUBLIC_GITHUB_SECRET:process.env.NEXT_PUBLIC_GITHUB_SECRET
+
+
 }
