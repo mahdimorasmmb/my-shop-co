@@ -5,7 +5,6 @@ import GitHubProvider from "next-auth/providers/github";
 
 export const authOptions = {
   // Configure one or more authentication providers\
-  site:env.NEXT_PUBLIC_NEXTAUTH_URL,
   providers: [
     GoogleProvider({
       clientId:env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
