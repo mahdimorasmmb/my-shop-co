@@ -14,7 +14,7 @@ const Profile = () => {
         className="cursor-pointer rounded-full"
         width={34}
         height={34}
-        //   onClick={()=>signOut}
+          onClick={()=>signOut()}
       />
     );
   }
