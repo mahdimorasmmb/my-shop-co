@@ -5,14 +5,16 @@ interface Props {
   loading?: boolean;
   padding?: string;
   noIcon?: boolean;
+  disabled?:boolean
 }
 
-function Button({ title, onClick, width, loading, padding, noIcon }: Props) {
+function Button({ title, onClick, width, loading, padding, noIcon,disabled }: Props) {
   return (
     <button
-      className={`ease group relative z-30 box-border inline-flex ${
+   
+      className={`  ease group relative z-30 box-border inline-flex ${
         width ? width : "w-auto"
-      } ${padding} cursor-pointer items-center justify-center overflow-hidden rounded bg-indigo-600 bg-gradient-to-r from-pink-500 to-violet-500 px-8 py-3 font-bold text-white transition-all duration-300 focus:outline-none`}
+      } ${padding} cursor-pointer items-center justify-center overflow-hidden rounded bg-indigo-600 bg-gradient-to-r from-pink-500 to-violet-500 px-8 py-3 font-bold text-white transition-all duration-300 focus:outline-none `}
       onClick={onClick}
     >
       <span className="absolute bottom-0 right-0 -mb-8 -mr-5 h-20 w-8 translate-x-1 rotate-45 transform bg-white opacity-10 transition-all duration-300 ease-out group-hover:translate-x-0"></span>
@@ -40,5 +42,7 @@ function Button({ title, onClick, width, loading, padding, noIcon }: Props) {
     </button>
   );
 }
+
+Button
 
 export default Button;

@@ -13,7 +13,6 @@ interface Props {
 }
 
 const Basket: React.FC<Props> = ({ type }) => {
-  // const items = useSelector(selectBasketItems);
   const items = useCheckoutStore((state)=>state.items)
 
   const ContentComponent = () => {

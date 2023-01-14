@@ -14,7 +14,7 @@ const config = {
     defaultLocale: "en",
   },
   images:{
-    domains:['localhost','127.0.0.1','rb.gy','avatars.githubusercontent.com']
+    domains:['localhost','127.0.0.1','rb.gy','avatars.githubusercontent.com','x6tl4oix.directus.app']
   }
 };
 export default config;

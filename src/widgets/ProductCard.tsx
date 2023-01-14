@@ -1,9 +1,12 @@
+
 import Image from "next/legacy/image";
 import React from "react";
 import { env } from "../env/client.mjs";
-import { useCheckoutStore } from "../store/index";
+import { useCheckoutStore } from "../store";
+import {  useSession } from "next-auth/react";
 
 import Button from "./Button";
+
 
 interface Props {
   product: Product;
@@ -11,8 +14,15 @@ interface Props {
 
 const assetsUrl = env.NEXT_PUBLIC_ASSETS_URL;
 
+
+
 const ProductCard = ({ product }: Props) => {
+  const {data} = useSession()
   const addItem = useCheckoutStore((state) => state.addItems);
+  
+
+  
+
   
 
   return (
@@ -51,7 +61,7 @@ const ProductCard = ({ product }: Props) => {
           </div>
         </div>
         <div className="mt-2">
-          <Button title="افزودن به سبد خرید" onClick={()=> addItem(product)} />
+         {addItem &&  <Button title="افزودن به سبد خرید" onClick={()=> addItem(product)} disabled={Boolean(data?.user?.email)}  />}
         </div>
       </div>
     </div>
