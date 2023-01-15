@@ -21,10 +21,6 @@ const ProductCard = ({ product }: Props) => {
   const addItem = useHydratedCheckoutStore((state) => state.addItems);
   
 
-  
-
-  
-
   return (
     <div
       dir="rtl"
