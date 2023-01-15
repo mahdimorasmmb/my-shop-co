@@ -1,33 +1,46 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
+import { useEffect, useState } from "react";
 import create from "zustand";
 import { createJSONStorage, devtools, persist } from "zustand/middleware";
-import { isBrowser } from "../helpers/tools";
 
-interface IState {
+export interface IState {
   items: Product[];
   addItems: (item: Product) => void;
   removeItems: (id: string) => void;
 }
 
-// typeof window !== 'undefined'
+const emptyState: IState = {
+  items: [],
+  addItems: (item) => {},
+  removeItems: (id) => {},
+};
 
 export const useCheckoutStore = create<IState>()(
-  devtools((set) => {
-    const loclaItems = isBrowser() && localStorage.getItem("checkout");
-    const checkout = loclaItems ? JSON.parse(loclaItems) : [];
-    return {
-      items: checkout,
-      addItems: (item) => set((state) => {           
-        const items = [...state.items, item]
-        isBrowser() && localStorage.setItem('checkout',JSON.stringify(items))
-        return { items: items}
+  devtools(
+    persist(
+      (set) => ({
+        items: [],
+        addItems: (item) => set((state) => ({ items: [...state.items, item] })),
+        removeItems(id) {
+          set((state) => {
+            const filterItems = state.items.filter((item) => item.id !== id);
+            return { items: [...filterItems] };
+          });
+        },
       }),
-      removeItems(id) {
-        set((state) => {
-          const filterItems = state.items.filter((item) => item.id !== id);
-         isBrowser() && localStorage.setItem('checkout',JSON.stringify(filterItems))
-          return { items: [...filterItems] };
-        });
-      },
-    };
-  })
+      {
+        name: "checkoutList",
+        storage: createJSONStorage(() => sessionStorage),
+      }
+    )
+  )
 );
+
+export const useHydratedCheckoutStore = ((selector, compare) => {
+  const store = useCheckoutStore(selector, compare);
+  const [hydrated, setHydrated] = useState(false);
+
+  useEffect(() => setHydrated(true), []);
+
+  return hydrated ? store : selector(emptyState);
+}) as typeof useCheckoutStore;

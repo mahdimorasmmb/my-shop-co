@@ -3,7 +3,7 @@ import React from "react";
 // import { selectBasketItems } from "../../redux/basketSlice";
 // import { useSelector } from "react-redux";
 import { ShoppingBagIcon } from "@heroicons/react/outline";
-import { useCheckoutStore } from "../store/index";
+import  {useCheckoutStore, useHydratedCheckoutStore}  from "../store/index";
 
 
 
@@ -13,7 +13,7 @@ interface Props {
 }
 
 const Basket: React.FC<Props> = ({ type }) => {
-  const items = useCheckoutStore((state)=>state.items)
+  const items = useHydratedCheckoutStore((state)=>state.items)
 
   const ContentComponent = () => {
     return (

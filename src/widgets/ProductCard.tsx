@@ -2,7 +2,7 @@
 import Image from "next/legacy/image";
 import React from "react";
 import { env } from "../env/client.mjs";
-import { useCheckoutStore } from "../store";
+import  {useCheckoutStore, useHydratedCheckoutStore}  from "../store";
 import {  useSession } from "next-auth/react";
 
 import Button from "./Button";
@@ -18,7 +18,7 @@ const assetsUrl = env.NEXT_PUBLIC_ASSETS_URL;
 
 const ProductCard = ({ product }: Props) => {
   const {data} = useSession()
-  const addItem = useCheckoutStore((state) => state.addItems);
+  const addItem = useHydratedCheckoutStore((state) => state.addItems);
   
 
   

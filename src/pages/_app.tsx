@@ -10,7 +10,10 @@ import "../styles/globals.css";
 import { Layout } from "../components/layout";
 import { AppProps } from "next/app";
 import { Session } from "next-auth";
+
 const queryClient = new QueryClient();
+
+
 
 function App({
   Component,
