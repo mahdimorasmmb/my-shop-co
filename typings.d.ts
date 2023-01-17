@@ -40,6 +40,7 @@ interface Product {
             id: string
         }
     }]
+    quantity:number
 }
 
 // interface StripeProduct {

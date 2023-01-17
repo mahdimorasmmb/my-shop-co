@@ -18,6 +18,7 @@ query HomepageProduct {
             category_name
         } 
        }
+       quantity
     }
 }
 `

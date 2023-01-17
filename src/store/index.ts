@@ -5,14 +5,16 @@ import { createJSONStorage, devtools, persist } from "zustand/middleware";
 
 export interface IState {
   items: Product[];
+  quantityItems: number;
   addItems: (item: Product) => void;
-  removeItems: (id: string) => void;
+  decrementItems: (id: string) => void;
 }
 
 const emptyState: IState = {
   items: [],
+  quantityItems: 0,
   addItems: (item) => {},
-  removeItems: (id) => {},
+  decrementItems: (id) => {},
 };
 
 export const useCheckoutStore = create<IState>()(
@@ -20,11 +22,56 @@ export const useCheckoutStore = create<IState>()(
     persist(
       (set) => ({
         items: [],
-        addItems: (item) => set((state) => ({ items: [...state.items, item] })),
-        removeItems(id) {
+        quantityItems: 0,
+        addItems: (item) =>
           set((state) => {
-            const filterItems = state.items.filter((item) => item.id !== id);
-            return { items: [...filterItems] };
+            let newState: Product[] = [];
+            let quantityItems = 0;
+            if (state.items.length === 0) {
+              newState = [...state.items, item];
+            } else {
+              let check = false;
+              state.items.map((product, key) => {
+                if (product.id === item.id) {
+                  newState = state.items;
+                  (newState[key] || ({} as Product)).quantity++;
+                  check = true;
+                }
+              });
+              if (!check) {
+                newState = [...state.items, item];
+              }
+            }
+            quantityItems = newState.reduce((total, product) => {
+              return (total += product.quantity);
+            }, 0);
+
+            return { items: [...newState], quantityItems };
+          }),
+          decrementItems(id) {
+          set((state) => {
+            let newState: Product[] = [];
+            let quantityItems = 0;
+            let check = false;
+            state.items.map((product, key) => {
+              if (product.id === id) {
+                newState = state.items;
+                (newState[key] || ({} as Product)).quantity;
+                if ((newState[key] || ({} as Product)).quantity > 1) {
+                  (newState[key] || ({} as Product)).quantity--;
+                  check = true;
+                }
+              }
+            });
+            if (!check) {
+              newState = state.items.filter((item) => item.id !== id);
+            }
+            // const filterItems = state.items.filter((item) => item.id !== id);
+
+            quantityItems = newState.reduce((total, product) => {
+              return (total += product.quantity);
+            }, 0);
+            return { items: [...newState], quantityItems };
           });
         },
       }),

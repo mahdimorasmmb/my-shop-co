@@ -9,6 +9,7 @@ import { ChevronDownIcon } from "@heroicons/react/outline";
 import Button from "../widgets/Button";
 import { CheckoutProduct } from "../widgets/CheckoutProduct";
 import { useCheckoutStore } from "../store";
+import { log } from "console";
 // import type Strip from "stripe";
 // import { fetchPostJSON } from "../utils/aoi-helpers";
 // import getStripe from "../utils/get-stripejs";
@@ -21,18 +22,18 @@ const Checkout = () => {
   const [groupedItemsInBasket, setGroupedItemsInBasket] = useState(
     {} as { [key: string]: Product[] }
   );
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
 
   // console.log(basketTotal);
 
-  useEffect(() => {
-    const groupedItems = items.reduce((results, item) => {
-      (results[item.id] = results[item.id] || []).push(item);
-      return results;
-    }, {} as { [key: string]: Product[] });
+  // useEffect(() => {
+  //   const groupedItems = items.reduce((results, item) => {
+  //     (results[item.id] = results[item.id] || []).push(item);
+  //     return results;
+  //   }, {} as { [key: string]: Product[] });
 
-    setGroupedItemsInBasket(groupedItems);
-  }, [items]);
+  //   setGroupedItemsInBasket(groupedItems);
+  // }, [items]);
 
   // const createCheckoutSession = async () => {
   //   setLoading(true);
@@ -83,10 +84,11 @@ const Checkout = () => {
 
         {items.length > 0 && (
           <div className="mx-5 md:mx-8">
-            {Object.entries(groupedItemsInBasket).map(([key, items]) => (
-              <CheckoutProduct key={key} items={items} id={key} />
-            ))}
-
+           {
+            items.map((product) => {
+              return  <CheckoutProduct key={product.id} product={product} id={product.id} />
+            })
+           }
             <div className="my-12 mt-6 ml-auto max-w-3xl ">
               <div className="divide-y divide-gray-300">
                 <div className="pb-4">
@@ -110,7 +112,9 @@ const Checkout = () => {
                   </div> */}
                   <div className="flex justify-between pt-4 text-xl font-semibold">
                     <h4>جمع کل </h4>
-                    <h4><Currency currency="irr" quantity={basketTotal} /></h4>
+                    <h4>
+                      <Currency currency="irr" quantity={basketTotal} />
+                    </h4>
                   </div>
                 </div>
                 {/* <div className="my-14 space-y-4">

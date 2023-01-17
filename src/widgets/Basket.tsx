@@ -13,7 +13,7 @@ interface Props {
 }
 
 const Basket: React.FC<Props> = ({ type }) => {
-  const items = useHydratedCheckoutStore((state)=>state.items)
+  const quantityItems = useHydratedCheckoutStore((state)=>state.quantityItems)
 
   const ContentComponent = () => {
     return (
@@ -24,7 +24,7 @@ const Basket: React.FC<Props> = ({ type }) => {
             : "fixed bottom-10 right-10 z-50 flex h-16 w-16 cursor-pointer items-center justify-center rounded-full bg-gray-300"
         }`}
       >
-        {items.length > 0 && (
+        {quantityItems > 0 && (
           <span
             className={` absolute z-50 flex items-center justify-center rounded-full bg-gradient-to-r from-pink-500 to-violet-500 text-[10px] text-white ${
               type === "default"
@@ -32,7 +32,7 @@ const Basket: React.FC<Props> = ({ type }) => {
                 : " -right-2 -top-2   h-7 w-7  "
             }`}
           >
-            {items.length}
+            {quantityItems}
           </span>
         )}
         <ShoppingBagIcon className="h-6 w-6  opacity-75 transition hover:opacity-100" />
@@ -40,7 +40,7 @@ const Basket: React.FC<Props> = ({ type }) => {
     );
   };
 
-  if (items.length === 0 && type === "bottomPage") {
+  if (quantityItems === 0 && type === "bottomPage") {
     return null;
   }
 
