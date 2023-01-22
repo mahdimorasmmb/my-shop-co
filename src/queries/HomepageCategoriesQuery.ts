@@ -1,5 +1,3 @@
-
-
 export const HomepageCategoriesQuery = `#graphql
 query HomepageCategories {
   categories {
@@ -8,4 +6,4 @@ query HomepageCategories {
    slug
   }
 }
-`
+`;

@@ -8,6 +8,8 @@ export interface IState {
   quantityItems: number;
   addItems: (item: Product) => void;
   decrementItems: (id: string) => void;
+  removeItem: (id: string) => void;
+  incrementItems: (id: string) => void;
 }
 
 const emptyState: IState = {
@@ -15,6 +17,8 @@ const emptyState: IState = {
   quantityItems: 0,
   addItems: (item) => {},
   decrementItems: (id) => {},
+  removeItem: (id) => {},
+  incrementItems: (id) => {},
 };
 
 export const useCheckoutStore = create<IState>()(
@@ -48,7 +52,7 @@ export const useCheckoutStore = create<IState>()(
 
             return { items: [...newState], quantityItems };
           }),
-          decrementItems(id) {
+        decrementItems(id) {
           set((state) => {
             let newState: Product[] = [];
             let quantityItems = 0;
@@ -74,6 +78,32 @@ export const useCheckoutStore = create<IState>()(
             return { items: [...newState], quantityItems };
           });
         },
+        removeItem: (id) =>
+          set((state) => {
+            let quantityItems = 0;
+            const filterItems = state.items.filter((item) => item.id !== id);
+            quantityItems = filterItems.reduce((total, product) => {
+              return (total += product.quantity);
+            }, 0);
+            return {
+              items: [...filterItems],
+              quantityItems,
+            };
+          }),
+          incrementItems: (id) =>
+          set((state) => {
+            let newState: Product[] = [];
+            state.items.map((product, key) => {
+              if (product.id === id) {
+                newState = state.items;
+                (newState[key] || ({} as Product)).quantity++;
+              }
+            });
+            return {
+              items: [...newState],
+              quantityItems: state.quantityItems++
+            };
+          }),
       }),
       {
         name: "checkoutList",

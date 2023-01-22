@@ -3,6 +3,7 @@
 export const HomepageProductQuery = `#graphql
 query HomepageProduct {
     products {
+       slug
        id
        product_name
        price

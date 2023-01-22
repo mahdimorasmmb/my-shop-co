@@ -1,27 +1,22 @@
 import Head from "next/head";
 import React, { useEffect, useState } from "react";
-// import { selectBasketItems, selectBasketTotal } from "../redux/basketSlice";
-// import { useSelector } from "react-redux";
+
 import { useRouter } from "next/router";
-// import { CheckoutProduct } from "../components/widgets/CheckoutProduct";
+
 import Currency from "react-currency-formatter";
 import { ChevronDownIcon } from "@heroicons/react/outline";
 import Button from "../widgets/Button";
 import { CheckoutProduct } from "../widgets/CheckoutProduct";
 import { useCheckoutStore } from "../store";
-import { log } from "console";
-// import type Strip from "stripe";
-// import { fetchPostJSON } from "../utils/aoi-helpers";
-// import getStripe from "../utils/get-stripejs";
+
+
 const Checkout = () => {
   const router = useRouter();
   const items = useCheckoutStore((state) => state.items);
   const basketTotal = useCheckoutStore((state) =>
-    state.items.reduce((total, product) => (total += product.price), 0)
+    state.items.reduce((total, product) => (total += product.price * product.quantity), 0)
   );
-  const [groupedItemsInBasket, setGroupedItemsInBasket] = useState(
-    {} as { [key: string]: Product[] }
-  );
+
   // const [loading, setLoading] = useState(false);
 
   // console.log(basketTotal);

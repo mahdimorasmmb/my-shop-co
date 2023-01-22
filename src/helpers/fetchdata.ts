@@ -14,6 +14,7 @@ const fetchData = async (query: string, { variables = {} }, token?: string) => {
     if (token) {
         headers.Authentication = `Bearer ${token}`
     }
+console.log(variables);
 
     const res = await fetch(graphQLAPI || '', {
         method: 'POST',

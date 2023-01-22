@@ -1,6 +1,7 @@
 import fetchData from "../helpers/fetchdata"
 import { HomepageCategoriesQuery } from "./HomepageCategoriesQuery"
 import { HomepageProductQuery } from "./HomepageProductQuery"
+import { ProductPageQuery } from "./ProductPageQuery"
 
 
 export const getHomepageProduct = async () => {
@@ -21,4 +22,17 @@ export const getHomepageCategories = async () => {
    
 
     return data.data.categories
+}
+
+export const getProductPage = async (variables={}) => {
+    console.log(variables);
+    
+    const data = await fetchData(ProductPageQuery,
+        {
+            variables
+        }
+    )
+   
+
+    return data.data.products
 }
