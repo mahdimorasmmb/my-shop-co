@@ -7,7 +7,7 @@
 
 - [Tailwind CSS](https://tailwindcss.com)
 
-### بک اند directus
+### بک اند [directus](https://directus.io/)
 
 
 
